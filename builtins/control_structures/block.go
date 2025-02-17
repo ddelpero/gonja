@@ -38,6 +38,7 @@ func (controlStructure *BlockControlStructure) Execute(r *exec.Renderer, tag *no
 
 	sub.Environment.Context.Set("super", infos.super)
 	sub.Environment.Context.Set("self", exec.Self(sub))
+	sub.Environment.Context.Set("root", r.Environment.RootPath)
 
 	err := sub.ExecuteWrapper(block)
 	if err != nil {
