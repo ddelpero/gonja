@@ -2,9 +2,9 @@ package integration_test
 
 import (
 	"github.com/MakeNowJust/heredoc"
-	"github.com/nikolalohinski/gonja/v2"
-	"github.com/nikolalohinski/gonja/v2/exec"
-	"github.com/nikolalohinski/gonja/v2/loaders"
+	"github.com/ddelpero/gonja/v2"
+	"github.com/ddelpero/gonja/v2/exec"
+	"github.com/ddelpero/gonja/v2/loaders"
 
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
@@ -159,7 +159,7 @@ var _ = Context("lists", func() {
 			shouldFail("{{ [].reverse('yolo') }}", "received 1 unexpected positional argument")
 		})
 	})
-	Context("https://github.com/NikolaLohinski/gonja/issues/16", func() {
+	Context("https://github.com/ddelpero/gonja/issues/16", func() {
 		BeforeEach(func() {
 			*loader = loaders.MustNewMemoryLoader(map[string]string{
 				*identifier: heredoc.Doc(`

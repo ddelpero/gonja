@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"strconv"
 
-	"github.com/nikolalohinski/gonja/v2/builtins/methods/pyerrors"
+	"github.com/ddelpero/gonja/v2/builtins/methods/pyerrors"
 )
 
 // Used to resolve nested kw-args

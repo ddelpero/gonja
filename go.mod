@@ -1,4 +1,4 @@
-module github.com/nikolalohinski/gonja/v2
+module github.com/ddelpero/gonja/v2
 
 go 1.22
 
@@ -33,5 +33,5 @@ require (
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
 
-// Critical issue https://github.com/NikolaLohinski/gonja/pull/28
+// Critical issue https://github.com/ddelpero/gonja/pull/28
 retract v2.3.2

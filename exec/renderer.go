@@ -6,9 +6,9 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/nikolalohinski/gonja/v2/config"
-	"github.com/nikolalohinski/gonja/v2/loaders"
-	"github.com/nikolalohinski/gonja/v2/nodes"
+	"github.com/ddelpero/gonja/v2/config"
+	"github.com/ddelpero/gonja/v2/loaders"
+	"github.com/ddelpero/gonja/v2/nodes"
 )
 
 // Renderer is a node visitor in charge of rendering

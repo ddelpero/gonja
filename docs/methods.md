@@ -138,7 +138,7 @@ Performs a string formatting operation. The string on which this method is calle
 
 See format [string syntax](https://docs.python.org/3/library/string.html#formatstrings) for a description of the various formatting options that can be specified in format strings.
 
-There are differences in python versions. We try to capture this with ["dialects" and default to `3.11`](https://github.com/NikolaLohinski/gonja/blob/master/builtins/methods/pystring/dialect.go). Override the DefaultDialect to get the desired behavior. 
+There are differences in python versions. We try to capture this with ["dialects" and default to `3.11`](https://github.com/ddelpero/gonja/blob/master/builtins/methods/pystring/dialect.go). Override the DefaultDialect to get the desired behavior. 
 
 
 ### The `format_map(mapping)` method

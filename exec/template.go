@@ -8,11 +8,11 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/nikolalohinski/gonja/v2/config"
-	"github.com/nikolalohinski/gonja/v2/loaders"
-	"github.com/nikolalohinski/gonja/v2/nodes"
-	"github.com/nikolalohinski/gonja/v2/parser"
-	"github.com/nikolalohinski/gonja/v2/tokens"
+	"github.com/ddelpero/gonja/v2/config"
+	"github.com/ddelpero/gonja/v2/loaders"
+	"github.com/ddelpero/gonja/v2/nodes"
+	"github.com/ddelpero/gonja/v2/parser"
+	"github.com/ddelpero/gonja/v2/tokens"
 )
 
 type Template struct {

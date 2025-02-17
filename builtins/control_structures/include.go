@@ -5,10 +5,11 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/nikolalohinski/gonja/v2/exec"
-	"github.com/nikolalohinski/gonja/v2/nodes"
-	"github.com/nikolalohinski/gonja/v2/parser"
-	"github.com/nikolalohinski/gonja/v2/tokens"
+	"github.com/ddelpero/gonja/v2/exec"
+	"github.com/ddelpero/gonja/v2/loaders"
+	"github.com/ddelpero/gonja/v2/nodes"
+	"github.com/ddelpero/gonja/v2/parser"
+	"github.com/ddelpero/gonja/v2/tokens"
 )
 
 type IncludeControlStructure struct {
@@ -48,7 +49,9 @@ func (controlStructure *IncludeControlStructure) Execute(r *exec.Renderer, tag *
 		}
 	}
 
-	loader, err := r.Loader.Inherit(filename)
+	path, _ := r.Environment.Context.Get("RootPath")
+	loader, err := loaders.NewFileSystemLoader(fmt.Sprintf("%v", path))
+	// loader, err := r.Loader.Inherit(filename)
 	if err != nil {
 		if controlStructure.ignoreMissing {
 			return nil

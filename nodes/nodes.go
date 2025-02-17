@@ -5,8 +5,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/nikolalohinski/gonja/v2/tokens"
-	u "github.com/nikolalohinski/gonja/v2/utils"
+	"github.com/ddelpero/gonja/v2/tokens"
+	u "github.com/ddelpero/gonja/v2/utils"
 )
 
 // ----------------------------------------------------------------------------

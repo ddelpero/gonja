@@ -10,12 +10,12 @@ import (
 	"time"
 
 	"github.com/MakeNowJust/heredoc"
+	"github.com/ddelpero/gonja/v2"
+	"github.com/ddelpero/gonja/v2/config"
+	"github.com/ddelpero/gonja/v2/exec"
+	"github.com/ddelpero/gonja/v2/loaders"
 	"github.com/hexops/gotextdiff"
 	"github.com/hexops/gotextdiff/myers"
-	"github.com/nikolalohinski/gonja/v2"
-	"github.com/nikolalohinski/gonja/v2/config"
-	"github.com/nikolalohinski/gonja/v2/exec"
-	"github.com/nikolalohinski/gonja/v2/loaders"
 	"github.com/yargevad/filepathx"
 
 	. "github.com/onsi/ginkgo/v2"
