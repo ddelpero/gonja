@@ -11,6 +11,7 @@ type Environment struct {
 	Filters           *FilterSet
 	ControlStructures *ControlStructureSet
 	Tests             *TestSet
+	ExcludeEval       []string
 	Context           *Context
 	Methods           Methods
 	RootPath          string

@@ -2,6 +2,7 @@ package exec
 
 import (
 	"fmt"
+	"slices"
 
 	"github.com/pkg/errors"
 
@@ -12,10 +13,20 @@ import (
 type TestFunction func(*Context, *Value, *VarArgs) (bool, error)
 
 func (e *Evaluator) EvalTest(expr *nodes.TestExpression) *Value {
-	value := e.Eval(expr.Expression)
-	// if value.IsError() {
-	// 	return AsValue(errors.Wrapf(value, `Unable to evaluate expresion %s`, expr.Expression))
-	// }
+	var value *Value
+	//You can eval the expression when checking defined or undefined
+	//because the point is to check if the variable is defined or not
+	//and calling eval always returns an error if the variable is not defined
+	if !slices.Contains(e.Environment.ExcludeEval, expr.Test.Name) {
+		value = e.Eval(expr.Expression)
+		if value.IsError() {
+			return AsValue(errors.Wrapf(value, `Unable to evaluate expresion %s`, expr.Expression))
+		}
+	} else {
+		//If we are checking if the variable is defined or not
+		//create the value with out evaluating the expression
+		value = ToValue(expr.Expression.Position().Val)
+	}
 
 	return e.ExecuteTest(expr.Test, value)
 }

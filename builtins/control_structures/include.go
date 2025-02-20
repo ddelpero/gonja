@@ -49,8 +49,8 @@ func (controlStructure *IncludeControlStructure) Execute(r *exec.Renderer, tag *
 		}
 	}
 
-	path, _ := r.Environment.Context.Get("RootPath")
-	loader, err := loaders.NewFileSystemLoader(fmt.Sprintf("%v", path))
+	path := r.Environment.RootPath
+	loader, err := loaders.NewFileSystemLoader(path)
 	// loader, err := r.Loader.Inherit(filename)
 	if err != nil {
 		if controlStructure.ignoreMissing {

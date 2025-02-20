@@ -45,6 +45,7 @@ func (r *Renderer) Inherit() *Renderer {
 			Filters:           r.Environment.Filters,
 			ControlStructures: r.Environment.ControlStructures,
 			Methods:           r.Environment.Methods,
+			RootPath:          r.Environment.RootPath,
 		},
 		Template: r.Template,
 		RootNode: r.RootNode,
