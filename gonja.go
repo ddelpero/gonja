@@ -20,6 +20,7 @@ var (
 		Context:           DefaultContext,
 		Filters:           builtins.Filters,
 		Tests:             builtins.Tests,
+		ExcludeEval:       builtins.ExcludeEval,
 		ControlStructures: builtins.ControlStructures,
 		Methods:           builtins.Methods,
 	}
