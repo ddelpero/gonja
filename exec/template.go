@@ -64,6 +64,7 @@ func (t *Template) Execute(wr io.Writer, data *Context) error {
 
 	renderer := NewRenderer(&Environment{
 		Tests:             t.environment.Tests,
+		ExcludeEval:       t.environment.ExcludeEval,
 		Filters:           t.environment.Filters,
 		ControlStructures: t.environment.ControlStructures,
 		Context:           t.environment.Context.Inherit().Update(data),

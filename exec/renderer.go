@@ -42,6 +42,7 @@ func (r *Renderer) Inherit() *Renderer {
 		Environment: &Environment{
 			Context:           r.Environment.Context.Inherit(),
 			Tests:             r.Environment.Tests,
+			ExcludeEval:       r.Environment.ExcludeEval,
 			Filters:           r.Environment.Filters,
 			ControlStructures: r.Environment.ControlStructures,
 			Methods:           r.Environment.Methods,
