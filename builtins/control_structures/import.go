@@ -6,6 +6,7 @@ import (
 	"github.com/pkg/errors"
 
 	"github.com/ddelpero/gonja/v2/exec"
+	"github.com/ddelpero/gonja/v2/loaders"
 	"github.com/ddelpero/gonja/v2/nodes"
 	"github.com/ddelpero/gonja/v2/parser"
 	"github.com/ddelpero/gonja/v2/tokens"
@@ -39,7 +40,8 @@ func (controlStructure *ImportControlStructure) Execute(r *exec.Renderer, tag *n
 		return errors.Errorf("failed to resolve filename: %s", err)
 	}
 
-	loader, err := r.Loader.Inherit(filename)
+	path := r.Environment.RootPath
+	loader, err := loaders.NewFileSystemLoader(path)
 	if err != nil {
 		return fmt.Errorf("failed to inherit loader from '%s': %s", filename, r.Loader)
 	}
