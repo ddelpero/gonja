@@ -94,7 +94,8 @@ func (controlStructure *FromImportControlStructure) Execute(r *exec.Renderer, ta
 		return errors.Errorf("failed to resolve filename: %s", err)
 	}
 
-	loader, err := r.Loader.Inherit(filename)
+	path := r.Environment.RootPath
+	loader, err := loaders.NewFileSystemLoader(path)
 	if err != nil {
 		return fmt.Errorf("failed to inherit loader from '%s': %s", filename, r.Loader)
 	}
