@@ -35,6 +35,29 @@ func NewRenderer(environment *Environment, wr io.Writer, config *config.Config, 
 	return r
 }
 
+// Inherit creates a new sub renderer that uses the parent context
+// This is used for control structures that need to inherit the parent context
+// such as if statements https://jinja.palletsprojects.com/en/stable/templates/#assignments
+func (r *Renderer) InheritIf() *Renderer {
+	ctx := r.Environment.Context
+	sub := &Renderer{
+		Config: r.Config.Inherit(),
+		Environment: &Environment{
+			Context:           ctx,
+			Tests:             r.Environment.Tests,
+			Filters:           r.Environment.Filters,
+			ControlStructures: r.Environment.ControlStructures,
+			Methods:           r.Environment.Methods,
+			RootPath:          r.Environment.RootPath,
+		},
+		Template: r.Template,
+		RootNode: r.RootNode,
+		Output:   r.Output,
+		Loader:   r.Loader,
+	}
+	return sub
+}
+
 // Inherit creates a new sub renderer
 func (r *Renderer) Inherit() *Renderer {
 	sub := &Renderer{
