@@ -149,6 +149,11 @@ func (r *Renderer) Visit(node nodes.Node) (nodes.Visitor, error) {
 }
 
 // ExecuteWrapper wraps the nodes.Wrapper execution logic
+func (r *Renderer) ExecuteIfWrapper(wrapper *nodes.Wrapper) error {
+	return nodes.Walk(r.InheritIf(), wrapper)
+}
+
+// ExecuteWrapper wraps the nodes.Wrapper execution logic
 func (r *Renderer) ExecuteWrapper(wrapper *nodes.Wrapper) error {
 	return nodes.Walk(r.Inherit(), wrapper)
 }
