@@ -23,6 +23,7 @@ var Filters = exec.NewFilterSet(map[string]exec.FilterFunction{
 	"abs":            filterAbs,
 	"attr":           filterAttr,
 	"batch":          filterBatch,
+	"bool":           filterBool,
 	"capitalize":     filterCapitalize,
 	"center":         filterCenter,
 	"default":        filterDefault,
@@ -137,6 +138,19 @@ func filterBatch(e *exec.Evaluator, in *exec.Value, params *exec.VarArgs) *exec.
 		out = append(out, exec.AsValue(row).Interface())
 	}
 	return exec.AsValue(out)
+}
+
+func filterBool(e *exec.Evaluator, in *exec.Value, params *exec.VarArgs) *exec.Value {
+	if in.IsError() {
+		return in
+	}
+	if p := params.ExpectNothing(); p.IsError() {
+		return exec.AsValue(errors.Wrap(p, "Wrong signature for 'bool'"))
+	}
+	if in.IsNil() {
+		return exec.AsValue(0)
+	}
+	return exec.AsValue(in.IsTrue())
 }
 
 func filterCapitalize(e *exec.Evaluator, in *exec.Value, params *exec.VarArgs) *exec.Value {
