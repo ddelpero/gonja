@@ -51,6 +51,11 @@ func MacroNodeToFunc(node *nodes.Macro, r *Renderer) (Macro, error) {
 		sub := r.Inherit()
 		sub.Output = &out
 
+		// Check if there's a caller function in the parent context (for call blocks)
+		if callerVal, ok := r.Environment.Context.Get("caller"); ok {
+			sub.Environment.Context.Set("caller", callerVal)
+		}
+
 		macroArguments := make([]*Pair, len(node.Kwargs))
 		for i, positionalArgument := range params.Args {
 			if i >= len(node.Kwargs) {

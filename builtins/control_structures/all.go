@@ -8,6 +8,7 @@ import (
 var All = exec.NewControlStructureSet(map[string]parser.ControlStructureParser{
 	"autoescape": autoescapeParser,
 	"block":      blockParser,
+	"call":       callParser,
 	"extends":    extendsParser,
 	"filter":     filterParser,
 	"for":        forParser,
