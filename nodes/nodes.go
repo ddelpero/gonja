@@ -5,8 +5,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/nikolalohinski/gonja/v2/tokens"
-	u "github.com/nikolalohinski/gonja/v2/utils"
+	"github.com/ddelpero/gonja/v2/tokens"
+	u "github.com/ddelpero/gonja/v2/utils"
 )
 
 // ----------------------------------------------------------------------------
@@ -426,6 +426,20 @@ type Macro struct {
 func (m *Macro) Position() *tokens.Token { return m.Location }
 func (m *Macro) String() string {
 	return fmt.Sprintf("%s(%s)", m.Name, m.Kwargs)
+}
+
+type CallBlock struct {
+	Location   *tokens.Token
+	Macro      Expression      // The macro/function being called
+	Args       []Expression    // Positional arguments
+	Kwargs     map[string]Expression // Keyword arguments
+	CallerArgs []string        // Arguments passed to the caller() function
+	Wrapper    *Wrapper        // The body of the call block
+}
+
+func (c *CallBlock) Position() *tokens.Token { return c.Location }
+func (c *CallBlock) String() string {
+	return fmt.Sprintf("call(%s)", c.Macro)
 }
 
 type Error struct {

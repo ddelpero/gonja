@@ -8,11 +8,11 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/nikolalohinski/gonja/v2/config"
-	"github.com/nikolalohinski/gonja/v2/loaders"
-	"github.com/nikolalohinski/gonja/v2/nodes"
-	"github.com/nikolalohinski/gonja/v2/parser"
-	"github.com/nikolalohinski/gonja/v2/tokens"
+	"github.com/ddelpero/gonja/v2/config"
+	"github.com/ddelpero/gonja/v2/loaders"
+	"github.com/ddelpero/gonja/v2/nodes"
+	"github.com/ddelpero/gonja/v2/parser"
+	"github.com/ddelpero/gonja/v2/tokens"
 )
 
 type Template struct {
@@ -64,10 +64,12 @@ func (t *Template) Execute(wr io.Writer, data *Context) error {
 
 	renderer := NewRenderer(&Environment{
 		Tests:             t.environment.Tests,
+		ExcludeEval:       t.environment.ExcludeEval,
 		Filters:           t.environment.Filters,
 		ControlStructures: t.environment.ControlStructures,
 		Context:           t.environment.Context.Inherit().Update(data),
 		Methods:           t.environment.Methods,
+		RootPath:          t.environment.RootPath,
 	}, wr, t.config, t.loader, t)
 
 	err := renderer.Execute()

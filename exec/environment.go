@@ -3,7 +3,7 @@ package exec
 import (
 	"sync"
 
-	"github.com/nikolalohinski/gonja/v2/parser"
+	"github.com/ddelpero/gonja/v2/parser"
 	"github.com/pkg/errors"
 )
 
@@ -11,8 +11,10 @@ type Environment struct {
 	Filters           *FilterSet
 	ControlStructures *ControlStructureSet
 	Tests             *TestSet
+	ExcludeEval       []string
 	Context           *Context
 	Methods           Methods
+	RootPath          string
 }
 
 type FilterSet struct {

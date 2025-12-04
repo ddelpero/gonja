@@ -6,10 +6,10 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/nikolalohinski/gonja/v2/exec"
-	"github.com/nikolalohinski/gonja/v2/nodes"
-	"github.com/nikolalohinski/gonja/v2/parser"
-	"github.com/nikolalohinski/gonja/v2/tokens"
+	"github.com/ddelpero/gonja/v2/exec"
+	"github.com/ddelpero/gonja/v2/nodes"
+	"github.com/ddelpero/gonja/v2/parser"
+	"github.com/ddelpero/gonja/v2/tokens"
 )
 
 type BlockControlStructure struct {
@@ -38,6 +38,7 @@ func (controlStructure *BlockControlStructure) Execute(r *exec.Renderer, tag *no
 
 	sub.Environment.Context.Set("super", infos.super)
 	sub.Environment.Context.Set("self", exec.Self(sub))
+	sub.Environment.Context.Set("root", r.Environment.RootPath)
 
 	err := sub.ExecuteWrapper(block)
 	if err != nil {

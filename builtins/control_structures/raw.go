@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/nikolalohinski/gonja/v2/exec"
-	"github.com/nikolalohinski/gonja/v2/nodes"
-	"github.com/nikolalohinski/gonja/v2/parser"
-	"github.com/nikolalohinski/gonja/v2/tokens"
+	"github.com/ddelpero/gonja/v2/exec"
+	"github.com/ddelpero/gonja/v2/nodes"
+	"github.com/ddelpero/gonja/v2/parser"
+	"github.com/ddelpero/gonja/v2/tokens"
 )
 
 type RawControlStructure struct {

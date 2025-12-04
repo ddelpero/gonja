@@ -6,10 +6,10 @@ import (
 	"fmt"
 	"path"
 
-	"github.com/nikolalohinski/gonja/v2/builtins"
-	"github.com/nikolalohinski/gonja/v2/config"
-	"github.com/nikolalohinski/gonja/v2/exec"
-	"github.com/nikolalohinski/gonja/v2/loaders"
+	"github.com/ddelpero/gonja/v2/builtins"
+	"github.com/ddelpero/gonja/v2/config"
+	"github.com/ddelpero/gonja/v2/exec"
+	"github.com/ddelpero/gonja/v2/loaders"
 )
 
 var (
@@ -20,6 +20,7 @@ var (
 		Context:           DefaultContext,
 		Filters:           builtins.Filters,
 		Tests:             builtins.Tests,
+		ExcludeEval:       builtins.ExcludeEval,
 		ControlStructures: builtins.ControlStructures,
 		Methods:           builtins.Methods,
 	}

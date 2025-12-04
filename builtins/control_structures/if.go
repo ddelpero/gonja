@@ -5,10 +5,10 @@ import (
 
 	log "github.com/sirupsen/logrus"
 
-	"github.com/nikolalohinski/gonja/v2/exec"
-	"github.com/nikolalohinski/gonja/v2/nodes"
-	"github.com/nikolalohinski/gonja/v2/parser"
-	"github.com/nikolalohinski/gonja/v2/tokens"
+	"github.com/ddelpero/gonja/v2/exec"
+	"github.com/ddelpero/gonja/v2/nodes"
+	"github.com/ddelpero/gonja/v2/parser"
+	"github.com/ddelpero/gonja/v2/tokens"
 )
 
 type IfControlStructure struct {
@@ -33,11 +33,11 @@ func (node *IfControlStructure) Execute(r *exec.Renderer, tag *nodes.ControlStru
 		}
 
 		if result.IsTrue() {
-			return r.ExecuteWrapper(node.wrappers[i])
+			return r.ExecuteIfWrapper(node.wrappers[i])
 		}
 		// Last condition?
 		if len(node.conditions) == i+1 && len(node.wrappers) > i+1 {
-			return r.ExecuteWrapper(node.wrappers[i+1])
+			return r.ExecuteIfWrapper(node.wrappers[i+1])
 		}
 	}
 	return nil

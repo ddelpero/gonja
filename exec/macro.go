@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/nikolalohinski/gonja/v2/nodes"
+	"github.com/ddelpero/gonja/v2/nodes"
 	"github.com/pkg/errors"
-	// "github.com/nikolalohinski/gonja/v2/nodes"
+	// "github.com/ddelpero/gonja/v2/nodes"
 )
 
 // FilterFunction is the type filter functions must fulfil
@@ -50,6 +50,11 @@ func MacroNodeToFunc(node *nodes.Macro, r *Renderer) (Macro, error) {
 		var out strings.Builder
 		sub := r.Inherit()
 		sub.Output = &out
+
+		// Check if there's a caller function in the parent context (for call blocks)
+		if callerVal, ok := r.Environment.Context.Get("caller"); ok {
+			sub.Environment.Context.Set("caller", callerVal)
+		}
 
 		macroArguments := make([]*Pair, len(node.Kwargs))
 		for i, positionalArgument := range params.Args {

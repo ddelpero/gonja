@@ -1,13 +1,14 @@
 package controlStructures
 
 import (
-	"github.com/nikolalohinski/gonja/v2/exec"
-	"github.com/nikolalohinski/gonja/v2/parser"
+	"github.com/ddelpero/gonja/v2/exec"
+	"github.com/ddelpero/gonja/v2/parser"
 )
 
 var All = exec.NewControlStructureSet(map[string]parser.ControlStructureParser{
 	"autoescape": autoescapeParser,
 	"block":      blockParser,
+	"call":       callParser,
 	"extends":    extendsParser,
 	"filter":     filterParser,
 	"for":        forParser,

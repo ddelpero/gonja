@@ -4,8 +4,10 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/nikolalohinski/gonja/v2/exec"
+	"github.com/ddelpero/gonja/v2/exec"
 )
+
+var ExcludeEval = []string{"callable", "defined", "undefined"}
 
 var Tests = exec.NewTestSet(map[string]exec.TestFunction{
 	"callable":    testCallable,
@@ -46,6 +48,13 @@ func testCallable(ctx *exec.Context, in *exec.Value, params *exec.VarArgs) (bool
 }
 
 func testDefined(ctx *exec.Context, in *exec.Value, params *exec.VarArgs) (bool, error) {
+	//We need to check ctx to see if the variable is defined
+	//because the point is to check if the variable is defined or not
+	// This doesn't work with sructs because in.String() returns "."
+	// _, ok := ctx.Get(in.String())
+	// if !ok {
+	// 	return false, nil
+	// }
 	return !(in.IsError() || in.IsNil()), nil
 }
 

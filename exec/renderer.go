@@ -6,9 +6,9 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/nikolalohinski/gonja/v2/config"
-	"github.com/nikolalohinski/gonja/v2/loaders"
-	"github.com/nikolalohinski/gonja/v2/nodes"
+	"github.com/ddelpero/gonja/v2/config"
+	"github.com/ddelpero/gonja/v2/loaders"
+	"github.com/ddelpero/gonja/v2/nodes"
 )
 
 // Renderer is a node visitor in charge of rendering
@@ -35,6 +35,29 @@ func NewRenderer(environment *Environment, wr io.Writer, config *config.Config, 
 	return r
 }
 
+// Inherit creates a new sub renderer that uses the parent context
+// This is used for control structures that need to inherit the parent context
+// such as if statements https://jinja.palletsprojects.com/en/stable/templates/#assignments
+func (r *Renderer) InheritIf() *Renderer {
+	ctx := r.Environment.Context
+	sub := &Renderer{
+		Config: r.Config.Inherit(),
+		Environment: &Environment{
+			Context:           ctx,
+			Tests:             r.Environment.Tests,
+			Filters:           r.Environment.Filters,
+			ControlStructures: r.Environment.ControlStructures,
+			Methods:           r.Environment.Methods,
+			RootPath:          r.Environment.RootPath,
+		},
+		Template: r.Template,
+		RootNode: r.RootNode,
+		Output:   r.Output,
+		Loader:   r.Loader,
+	}
+	return sub
+}
+
 // Inherit creates a new sub renderer
 func (r *Renderer) Inherit() *Renderer {
 	sub := &Renderer{
@@ -42,9 +65,11 @@ func (r *Renderer) Inherit() *Renderer {
 		Environment: &Environment{
 			Context:           r.Environment.Context.Inherit(),
 			Tests:             r.Environment.Tests,
+			ExcludeEval:       r.Environment.ExcludeEval,
 			Filters:           r.Environment.Filters,
 			ControlStructures: r.Environment.ControlStructures,
 			Methods:           r.Environment.Methods,
+			RootPath:          r.Environment.RootPath,
 		},
 		Template: r.Template,
 		RootNode: r.RootNode,
@@ -121,6 +146,11 @@ func (r *Renderer) Visit(node nodes.Node) (nodes.Visitor, error) {
 	default:
 		return r, nil
 	}
+}
+
+// ExecuteWrapper wraps the nodes.Wrapper execution logic
+func (r *Renderer) ExecuteIfWrapper(wrapper *nodes.Wrapper) error {
+	return nodes.Walk(r.InheritIf(), wrapper)
 }
 
 // ExecuteWrapper wraps the nodes.Wrapper execution logic
